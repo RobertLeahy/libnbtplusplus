@@ -1,0 +1,9 @@
+PROJECT_NAME="libnbtplusplus"
+PROJECT_BRIEF="A C++ library for Minecraft's file format NBT"
+OUTPUT_DIRECTORY="doc"
+INPUT=include/
+FILE_PATTERNS=*.h
+RECURSIVE=YES
+INPUT_FILTER=
+FILTER_SOURCE_FILES=NO
+STRIP_FROM_INC_PATH=include/
