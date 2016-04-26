@@ -19,9 +19,6 @@ endif
 
 
 OPTS_SHARED:=-I ./include -std=c++1z
-ifeq ($(OS),Windows_NT)
-	OPTS_SHARED:=$(OPTS_SHARED) -L "../MCPP2016/bin" -I "C:/Users/rleahy/Downloads/zlib128/zlib-1.2.8"
-endif
 
 
 ifeq ($(OS),Windows_NT)
@@ -84,8 +81,6 @@ obj/%.o:
 	
 OBJS:=\
 obj/endian_str.o \
-obj/io/izlibstream.o \
-obj/io/ozlibstream.o \
 obj/io/stream_reader.o \
 obj/io/stream_writer.o \
 obj/tag.o \
@@ -102,4 +97,4 @@ all: bin/libnbt++$(MODULE_EXT)
 bin/libnbt++$(MODULE_EXT): \
 $(OBJS) | \
 bin
-	$(GPP) -shared -o $@ $^ $(LINK) -lz
+	$(GPP) -shared -o $@ $^ $(LINK)
