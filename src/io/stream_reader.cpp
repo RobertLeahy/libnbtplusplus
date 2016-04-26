@@ -27,21 +27,21 @@ namespace nbt
 namespace io
 {
 
-std::pair<std::string, std::unique_ptr<tag_compound>> read_compound(std::istream& is, endian::endian e)
+std::pair<std::string, std::unique_ptr<tag_compound>> read_compound(std::basic_istream<unsigned char>& is, endian::endian e)
 {
     return stream_reader(is, e).read_compound();
 }
 
-std::pair<std::string, std::unique_ptr<tag>> read_tag(std::istream& is, endian::endian e)
+std::pair<std::string, std::unique_ptr<tag>> read_tag(std::basic_istream<unsigned char>& is, endian::endian e)
 {
     return stream_reader(is, e).read_tag();
 }
 
-stream_reader::stream_reader(std::istream& is, endian::endian e) noexcept:
+stream_reader::stream_reader(std::basic_istream<unsigned char>& is, endian::endian e) noexcept:
     is(is), endian(e)
 {}
 
-std::istream& stream_reader::get_istr() const
+std::basic_istream<unsigned char>& stream_reader::get_istr() const
 {
     return is;
 }
@@ -100,7 +100,7 @@ std::string stream_reader::read_string()
         throw input_error("Error reading string");
 
     std::string ret(len, '\0');
-    is.read(&ret[0], len); //C++11 allows us to do this
+    is.read(reinterpret_cast<unsigned char*>(&ret[0]), len); //C++11 allows us to do this
     if(!is)
         throw input_error("Error reading string");
     return ret;

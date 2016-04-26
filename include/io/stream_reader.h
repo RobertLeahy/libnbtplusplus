@@ -46,7 +46,7 @@ class NBT_EXPORT input_error : public std::runtime_error
  * of Minecraft uses Big Endian, the Pocket edition uses Little Endian
  * @throw input_error on failure, or if the tag in the stream is not a compound
  */
-NBT_EXPORT std::pair<std::string, std::unique_ptr<tag_compound>> read_compound(std::istream& is, endian::endian e = endian::big);
+NBT_EXPORT std::pair<std::string, std::unique_ptr<tag_compound>> read_compound(std::basic_istream<unsigned char>& is, endian::endian e = endian::big);
 
 /**
  * @brief Reads a named tag from the stream
@@ -55,7 +55,7 @@ NBT_EXPORT std::pair<std::string, std::unique_ptr<tag_compound>> read_compound(s
  * of Minecraft uses Big Endian, the Pocket edition uses Little Endian
  * @throw input_error on failure
  */
-NBT_EXPORT std::pair<std::string, std::unique_ptr<tag>> read_tag(std::istream& is, endian::endian e = endian::big);
+NBT_EXPORT std::pair<std::string, std::unique_ptr<tag>> read_tag(std::basic_istream<unsigned char>& is, endian::endian e = endian::big);
 
 /**
  * @brief Helper class for reading NBT tags from input streams
@@ -70,10 +70,10 @@ public:
      * @param e the byte order of the source data. The Java edition
      * of Minecraft uses Big Endian, the Pocket edition uses Little Endian
      */
-    explicit stream_reader(std::istream& is, endian::endian e = endian::big) noexcept;
+    explicit stream_reader(std::basic_istream<unsigned char>& is, endian::endian e = endian::big) noexcept;
 
     ///Returns the stream
-    std::istream& get_istr() const;
+    std::basic_istream<unsigned char>& get_istr() const;
     ///Returns the byte order
     endian::endian get_endian() const;
 
@@ -120,7 +120,7 @@ public:
     std::string read_string();
 
 private:
-    std::istream& is;
+    std::basic_istream<unsigned char>& is;
     const endian::endian endian;
 };
 

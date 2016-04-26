@@ -25,7 +25,7 @@ namespace nbt
 namespace io
 {
 
-void write_tag(const std::string& key, const tag& t, std::ostream& os, endian::endian e)
+void write_tag(const std::string& key, const tag& t, std::basic_ostream<unsigned char>& os, endian::endian e)
 {
     stream_writer(os, e).write_tag(key, t);
 }
@@ -47,7 +47,7 @@ void stream_writer::write_string(const std::string& str)
         throw std::length_error(sstr.str());
     }
     write_num(static_cast<uint16_t>(str.size()));
-    os.write(str.data(), str.size());
+    os.write(reinterpret_cast<const unsigned char*>(str.data()), str.size());
 }
 
 }

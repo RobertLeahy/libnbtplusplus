@@ -59,33 +59,33 @@ namespace //anonymous
 
 //------------------------------------------------------------------------------
 
-void read_little(std::istream& is, uint8_t& x)
+void read_little(std::basic_istream<unsigned char>& is, uint8_t& x)
 {
-    is.get(reinterpret_cast<char&>(x));
+    is.get(reinterpret_cast<unsigned char&>(x));
 }
 
-void read_little(std::istream& is, uint16_t& x)
+void read_little(std::basic_istream<unsigned char>& is, uint16_t& x)
 {
     uint8_t tmp[2];
-    is.read(reinterpret_cast<char*>(tmp), 2);
+    is.read(reinterpret_cast<unsigned char*>(tmp), 2);
     x =  uint16_t(tmp[0])
       | (uint16_t(tmp[1]) << 8);
 }
 
-void read_little(std::istream& is, uint32_t& x)
+void read_little(std::basic_istream<unsigned char>& is, uint32_t& x)
 {
     uint8_t tmp[4];
-    is.read(reinterpret_cast<char*>(tmp), 4);
+    is.read(reinterpret_cast<unsigned char*>(tmp), 4);
     x =  uint32_t(tmp[0])
       | (uint32_t(tmp[1]) << 8)
       | (uint32_t(tmp[2]) << 16)
       | (uint32_t(tmp[3]) << 24);
 }
 
-void read_little(std::istream& is, uint64_t& x)
+void read_little(std::basic_istream<unsigned char>& is, uint64_t& x)
 {
     uint8_t tmp[8];
-    is.read(reinterpret_cast<char*>(tmp), 8);
+    is.read(reinterpret_cast<unsigned char*>(tmp), 8);
     x =  uint64_t(tmp[0])
       | (uint64_t(tmp[1]) << 8)
       | (uint64_t(tmp[2]) << 16)
@@ -96,19 +96,19 @@ void read_little(std::istream& is, uint64_t& x)
       | (uint64_t(tmp[7]) << 56);
 }
 
-void read_little(std::istream& is, int8_t & x) { read_little(is, reinterpret_cast<uint8_t &>(x)); }
-void read_little(std::istream& is, int16_t& x) { read_little(is, reinterpret_cast<uint16_t&>(x)); }
-void read_little(std::istream& is, int32_t& x) { read_little(is, reinterpret_cast<uint32_t&>(x)); }
-void read_little(std::istream& is, int64_t& x) { read_little(is, reinterpret_cast<uint64_t&>(x)); }
+void read_little(std::basic_istream<unsigned char>& is, int8_t & x) { read_little(is, reinterpret_cast<uint8_t &>(x)); }
+void read_little(std::basic_istream<unsigned char>& is, int16_t& x) { read_little(is, reinterpret_cast<uint16_t&>(x)); }
+void read_little(std::basic_istream<unsigned char>& is, int32_t& x) { read_little(is, reinterpret_cast<uint32_t&>(x)); }
+void read_little(std::basic_istream<unsigned char>& is, int64_t& x) { read_little(is, reinterpret_cast<uint64_t&>(x)); }
 
-void read_little(std::istream& is, float& x)
+void read_little(std::basic_istream<unsigned char>& is, float& x)
 {
     uint32_t tmp;
     read_little(is, tmp);
     pun_int_to_float(x, tmp);
 }
 
-void read_little(std::istream& is, double& x)
+void read_little(std::basic_istream<unsigned char>& is, double& x)
 {
     uint64_t tmp;
     read_little(is, tmp);
@@ -117,33 +117,33 @@ void read_little(std::istream& is, double& x)
 
 //------------------------------------------------------------------------------
 
-void read_big(std::istream& is, uint8_t& x)
+void read_big(std::basic_istream<unsigned char>& is, uint8_t& x)
 {
-    is.read(reinterpret_cast<char*>(&x), 1);
+    is.read(reinterpret_cast<unsigned char*>(&x), 1);
 }
 
-void read_big(std::istream& is, uint16_t& x)
+void read_big(std::basic_istream<unsigned char>& is, uint16_t& x)
 {
     uint8_t tmp[2];
-    is.read(reinterpret_cast<char*>(tmp), 2);
+    is.read(reinterpret_cast<unsigned char*>(tmp), 2);
     x =  uint16_t(tmp[1])
       | (uint16_t(tmp[0]) << 8);
 }
 
-void read_big(std::istream& is, uint32_t& x)
+void read_big(std::basic_istream<unsigned char>& is, uint32_t& x)
 {
     uint8_t tmp[4];
-    is.read(reinterpret_cast<char*>(tmp), 4);
+    is.read(reinterpret_cast<unsigned char*>(tmp), 4);
     x =  uint32_t(tmp[3])
       | (uint32_t(tmp[2]) << 8)
       | (uint32_t(tmp[1]) << 16)
       | (uint32_t(tmp[0]) << 24);
 }
 
-void read_big(std::istream& is, uint64_t& x)
+void read_big(std::basic_istream<unsigned char>& is, uint64_t& x)
 {
     uint8_t tmp[8];
-    is.read(reinterpret_cast<char*>(tmp), 8);
+    is.read(reinterpret_cast<unsigned char*>(tmp), 8);
     x =  uint64_t(tmp[7])
       | (uint64_t(tmp[6]) << 8)
       | (uint64_t(tmp[5]) << 16)
@@ -154,19 +154,19 @@ void read_big(std::istream& is, uint64_t& x)
       | (uint64_t(tmp[0]) << 56);
 }
 
-void read_big(std::istream& is, int8_t & x) { read_big(is, reinterpret_cast<uint8_t &>(x)); }
-void read_big(std::istream& is, int16_t& x) { read_big(is, reinterpret_cast<uint16_t&>(x)); }
-void read_big(std::istream& is, int32_t& x) { read_big(is, reinterpret_cast<uint32_t&>(x)); }
-void read_big(std::istream& is, int64_t& x) { read_big(is, reinterpret_cast<uint64_t&>(x)); }
+void read_big(std::basic_istream<unsigned char>& is, int8_t & x) { read_big(is, reinterpret_cast<uint8_t &>(x)); }
+void read_big(std::basic_istream<unsigned char>& is, int16_t& x) { read_big(is, reinterpret_cast<uint16_t&>(x)); }
+void read_big(std::basic_istream<unsigned char>& is, int32_t& x) { read_big(is, reinterpret_cast<uint32_t&>(x)); }
+void read_big(std::basic_istream<unsigned char>& is, int64_t& x) { read_big(is, reinterpret_cast<uint64_t&>(x)); }
 
-void read_big(std::istream& is, float& x)
+void read_big(std::basic_istream<unsigned char>& is, float& x)
 {
     uint32_t tmp;
     read_big(is, tmp);
     pun_int_to_float(x, tmp);
 }
 
-void read_big(std::istream& is, double& x)
+void read_big(std::basic_istream<unsigned char>& is, double& x)
 {
     uint64_t tmp;
     read_big(is, tmp);
@@ -175,30 +175,30 @@ void read_big(std::istream& is, double& x)
 
 //------------------------------------------------------------------------------
 
-void write_little(std::ostream& os, uint8_t x)
+void write_little(std::basic_ostream<unsigned char>& os, uint8_t x)
 {
     os.put(x);
 }
 
-void write_little(std::ostream& os, uint16_t x)
+void write_little(std::basic_ostream<unsigned char>& os, uint16_t x)
 {
     uint8_t tmp[2] {
         uint8_t(x),
         uint8_t(x >> 8)};
-    os.write(reinterpret_cast<const char*>(tmp), 2);
+    os.write(reinterpret_cast<const unsigned char*>(tmp), 2);
 }
 
-void write_little(std::ostream& os, uint32_t x)
+void write_little(std::basic_ostream<unsigned char>& os, uint32_t x)
 {
     uint8_t tmp[4] {
         uint8_t(x),
         uint8_t(x >> 8),
         uint8_t(x >> 16),
         uint8_t(x >> 24)};
-    os.write(reinterpret_cast<const char*>(tmp), 4);
+    os.write(reinterpret_cast<const unsigned char*>(tmp), 4);
 }
 
-void write_little(std::ostream& os, uint64_t x)
+void write_little(std::basic_ostream<unsigned char>& os, uint64_t x)
 {
     uint8_t tmp[8] {
         uint8_t(x),
@@ -209,50 +209,50 @@ void write_little(std::ostream& os, uint64_t x)
         uint8_t(x >> 40),
         uint8_t(x >> 48),
         uint8_t(x >> 56)};
-    os.write(reinterpret_cast<const char*>(tmp), 8);
+    os.write(reinterpret_cast<const unsigned char*>(tmp), 8);
 }
 
-void write_little(std::ostream& os, int8_t  x) { write_little(os, static_cast<uint8_t >(x)); }
-void write_little(std::ostream& os, int16_t x) { write_little(os, static_cast<uint16_t>(x)); }
-void write_little(std::ostream& os, int32_t x) { write_little(os, static_cast<uint32_t>(x)); }
-void write_little(std::ostream& os, int64_t x) { write_little(os, static_cast<uint64_t>(x)); }
+void write_little(std::basic_ostream<unsigned char>& os, int8_t  x) { write_little(os, static_cast<uint8_t >(x)); }
+void write_little(std::basic_ostream<unsigned char>& os, int16_t x) { write_little(os, static_cast<uint16_t>(x)); }
+void write_little(std::basic_ostream<unsigned char>& os, int32_t x) { write_little(os, static_cast<uint32_t>(x)); }
+void write_little(std::basic_ostream<unsigned char>& os, int64_t x) { write_little(os, static_cast<uint64_t>(x)); }
 
-void write_little(std::ostream& os, float x)
+void write_little(std::basic_ostream<unsigned char>& os, float x)
 {
     write_little(os, pun_float_to_int(x));
 }
 
-void write_little(std::ostream& os, double x)
+void write_little(std::basic_ostream<unsigned char>& os, double x)
 {
     write_little(os, pun_double_to_int(x));
 }
 
 //------------------------------------------------------------------------------
 
-void write_big(std::ostream& os, uint8_t x)
+void write_big(std::basic_ostream<unsigned char>& os, uint8_t x)
 {
     os.put(x);
 }
 
-void write_big(std::ostream& os, uint16_t x)
+void write_big(std::basic_ostream<unsigned char>& os, uint16_t x)
 {
     uint8_t tmp[2] {
         uint8_t(x >> 8),
         uint8_t(x)};
-    os.write(reinterpret_cast<const char*>(tmp), 2);
+    os.write(reinterpret_cast<const unsigned char*>(tmp), 2);
 }
 
-void write_big(std::ostream& os, uint32_t x)
+void write_big(std::basic_ostream<unsigned char>& os, uint32_t x)
 {
     uint8_t tmp[4] {
         uint8_t(x >> 24),
         uint8_t(x >> 16),
         uint8_t(x >> 8),
         uint8_t(x)};
-    os.write(reinterpret_cast<const char*>(tmp), 4);
+    os.write(reinterpret_cast<const unsigned char*>(tmp), 4);
 }
 
-void write_big(std::ostream& os, uint64_t x)
+void write_big(std::basic_ostream<unsigned char>& os, uint64_t x)
 {
     uint8_t tmp[8] {
         uint8_t(x >> 56),
@@ -263,20 +263,20 @@ void write_big(std::ostream& os, uint64_t x)
         uint8_t(x >> 16),
         uint8_t(x >> 8),
         uint8_t(x)};
-    os.write(reinterpret_cast<const char*>(tmp), 8);
+    os.write(reinterpret_cast<const unsigned char*>(tmp), 8);
 }
 
-void write_big(std::ostream& os, int8_t  x) { write_big(os, static_cast<uint8_t >(x)); }
-void write_big(std::ostream& os, int16_t x) { write_big(os, static_cast<uint16_t>(x)); }
-void write_big(std::ostream& os, int32_t x) { write_big(os, static_cast<uint32_t>(x)); }
-void write_big(std::ostream& os, int64_t x) { write_big(os, static_cast<uint64_t>(x)); }
+void write_big(std::basic_ostream<unsigned char>& os, int8_t  x) { write_big(os, static_cast<uint8_t >(x)); }
+void write_big(std::basic_ostream<unsigned char>& os, int16_t x) { write_big(os, static_cast<uint16_t>(x)); }
+void write_big(std::basic_ostream<unsigned char>& os, int32_t x) { write_big(os, static_cast<uint32_t>(x)); }
+void write_big(std::basic_ostream<unsigned char>& os, int64_t x) { write_big(os, static_cast<uint64_t>(x)); }
 
-void write_big(std::ostream& os, float x)
+void write_big(std::basic_ostream<unsigned char>& os, float x)
 {
     write_big(os, pun_float_to_int(x));
 }
 
-void write_big(std::ostream& os, double x)
+void write_big(std::basic_ostream<unsigned char>& os, double x)
 {
     write_big(os, pun_double_to_int(x));
 }

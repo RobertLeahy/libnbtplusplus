@@ -38,7 +38,7 @@ void tag_array<int8_t>::read_payload(io::stream_reader& reader)
         throw io::input_error("Error reading length of tag_byte_array");
 
     data.resize(length);
-    reader.get_istr().read(reinterpret_cast<char*>(data.data()), length);
+    reader.get_istr().read(reinterpret_cast<unsigned char*>(data.data()), length);
     if(!reader.get_istr())
         throw io::input_error("Error reading contents of tag_byte_array");
 }
@@ -75,7 +75,7 @@ void tag_array<int8_t>::write_payload(io::stream_writer& writer) const
         throw std::length_error("Byte array is too large for NBT");
     }
     writer.write_num(static_cast<int32_t>(size()));
-    writer.get_ostr().write(reinterpret_cast<const char*>(data.data()), data.size());
+    writer.get_ostr().write(reinterpret_cast<const unsigned char*>(data.data()), data.size());
 }
 
 template<>
